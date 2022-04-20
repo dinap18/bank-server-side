@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const user = require("../models/")("User");
 const ObjectId = require('mongodb').ObjectId;
 
@@ -12,6 +13,9 @@ module.exports = class UserService{
 
     static async createUser(data){
         try {
+            const saltOrRounds = 10
+            const hashedPassword = await bcrypt.hash(data.password, saltOrRounds)
+            data.password = hashedPassword
             return await user.create(data);
         } catch (error) {
             console.log(error);
@@ -20,7 +24,9 @@ module.exports = class UserService{
     }
     static async getUserById(userId){
         try {
-            return  await user.findById({_id: userId});
+            console.log(new ObjectId(userId))
+            console.log(userId)
+            return  await user.findById({_id: new ObjectId(userId)});
         } catch (error) {
             console.log(`User not found. ${error}`)
         }

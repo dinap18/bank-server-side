@@ -27,6 +27,7 @@ module.exports = class User{
 
     static async apiCreateUser(req, res, next){
         try {
+
             const createdUser =  await userService.createUser(req.body);
             res.json(createdUser);
         } catch (error) {
@@ -36,7 +37,7 @@ module.exports = class User{
 
     static async apiUpdateUser(req, res, next) {
         try {
-            const userId = req.params._id;
+            const userId = req.params.id;
             const updatedUser = await userService.updateUser(req, userId);
 
             if (updatedUser.modifiedCount === 0) {
@@ -52,7 +53,7 @@ module.exports = class User{
 
     static async apiDeleteUser(req, res, next) {
         try {
-            const userId = req.params._id;
+            const userId = req.params.id;
             const deleteResponse = await userService.deleteUser(userId)
             res.json(deleteResponse);
         } catch (error) {

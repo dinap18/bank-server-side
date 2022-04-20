@@ -17,5 +17,6 @@ require("./User")(db);
 require("./LevCoin")(db);
 require("./Loan")(db);
 require("./Transfer")(db);
+require("./AuditLogChain")(db);
 
 module.exports = model => db.model(model);

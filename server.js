@@ -22,8 +22,8 @@ var session = require('express-session');
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser.urlencoded({extended: true}))
-    .use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 // required for passport
 app.use(session({secret: 'secret'})); // session secret
 app.use(passport.initialize());
@@ -32,7 +32,18 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
 let users = require(__dirname + '/routes/UserRoutes.js')
-app.use("/api/v1/users", users);
+app.use("/api/v1/user", users);
+
+let loans = require(__dirname + '/routes/LoanRoutes.js')
+app.use("/api/v1/loan", loans);
+
+let transfers = require(__dirname + '/routes/TransferRoutes.js')
+app.use("/api/v1/transfer", transfers);
+
+let levCoins = require(__dirname + '/routes/LevCoinRoutes.js')
+app.use("/api/v1/levcoin", levCoins);
+
+
 
 // launch ======================================================================
 let server = app.listen(port);
