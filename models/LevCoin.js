@@ -3,7 +3,7 @@ const debug = require("debug");
 
 
 module.exports = db => {
-    // create a schema
+
     let schema = new mongoose.Schema({
         user: {type: String, required: true},
         value: {type: Number, required: true}
@@ -16,8 +16,7 @@ module.exports = db => {
         })
     }
 
-    // the schema is useless so far
-    // we need to create a model using it
-    db.model('LevCoin', schema); // if model name === collection name
+
+    db.model('LevCoin', schema);
     debug("LevCoin model created");
 }

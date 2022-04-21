@@ -1,8 +1,7 @@
 const Transfer = require("../models/")("Transfer");
-const ObjectId = require('mongodb').ObjectId;
 const {AuditLogBlockchain} = require("../services/AuditLogChainService")
 const UserService = require("../services/UserService")
-
+const Currency=require("../core/Currency")
 module.exports = class TransferService {
     static async getAllTransfers() {
         try {
@@ -16,16 +15,19 @@ module.exports = class TransferService {
     static async createTransfer(data) {
         try {
 
+            const to = await UserService.getUserById(data.to);
 
-            let to = null;
-            await UserService.getUserById(data.to).then(result =>{ to = result;console.log(result)});
-
-            let from = null;
-            await UserService.getUserById(data.from).then(result => from = result);
+            const from =   await UserService.getUserById(data.from);
 
             if (!to || !from || data.value < 0) {
                 throw new Error("invalid transfer details");
             }
+
+            if(to.accountCurrency!==from.accountCurrency)
+            {
+                data.value=await Currency.convertCurrency(from.accountCurrency,to.accountCurrency,data.value)
+            }
+
             let blockChain = new AuditLogBlockchain();
             await blockChain.initialize();
 
@@ -36,11 +38,12 @@ module.exports = class TransferService {
             if (!status) {
                 throw new Error("error validating transfer");
             }
-            to.accountBalance -= data.value;
-            from.accountBalance += data.value;
+            to.accountBalance += data.value;
+            from.accountBalance -= data.value;
 
             await UserService.updateUser(to, data.to);
             await UserService.updateUser(from, data.from);
+
             return await Transfer.create(data);
 
         } catch (error) {

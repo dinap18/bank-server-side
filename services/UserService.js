@@ -2,8 +2,8 @@ const bcrypt = require("bcrypt");
 const user = require("../models/")("User");
 const ObjectId = require('mongodb').ObjectId;
 
-module.exports = class UserService{
-    static async getAllUsers(){
+module.exports = class UserService {
+    static async getAllUsers() {
         try {
             return await user.find();
         } catch (error) {
@@ -11,7 +11,7 @@ module.exports = class UserService{
         }
     }
 
-    static async createUser(data){
+    static async createUser(data) {
         try {
             const saltOrRounds = 10
             const hashedPassword = await bcrypt.hash(data.password, saltOrRounds)
@@ -22,29 +22,28 @@ module.exports = class UserService{
         }
 
     }
-    static async getUserById(userId){
+
+    static async getUserById(userId) {
         try {
-            console.log(new ObjectId(userId))
-            console.log(userId)
-            return  await user.findById({_id: new ObjectId(userId)});
+            return await user.findById({_id: new ObjectId(userId)});
         } catch (error) {
             console.log(`User not found. ${error}`)
         }
     }
 
-    static async updateUser(updatedUser,id){
+    static async updateUser(updatedUser, id) {
         try {
-            const query = {_id:new ObjectId(id)}
+            const query = {_id: new ObjectId(id)}
             return await user.updateOne(
                 query, updatedUser
             );
         } catch (error) {
-            console.log(`Could not update User ${error}` );
+            console.log(`Could not update User ${error}`);
 
         }
     }
 
-    static async deleteUser(userId){
+    static async deleteUser(userId) {
         try {
             return await user.findOneAndDelete(userId);
         } catch (error) {

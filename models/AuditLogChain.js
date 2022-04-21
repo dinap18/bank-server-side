@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const debug = require("debug");
 
-// define the AuditLogChain model for data storage
+
 module.exports = db => {
-    // create a schema
+
     let schema = new mongoose.Schema({
         data: {type: mongoose.Schema.Types.Mixed},
         preceding_hash: {type: mongoose.Schema.Types.String},
@@ -18,6 +18,6 @@ module.exports = db => {
     schema.virtual('id').get(function () {
         return String(this._id);
     });
-    db.model('AuditLogChain', schema); // if model name === collection name
+    db.model('AuditLogChain', schema);
     debug("Blockchain model created");
 }

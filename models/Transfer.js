@@ -3,11 +3,12 @@ const debug = require("debug");
 
 
 module.exports = db => {
-    // create a schema
+
     let schema = new mongoose.Schema({
         to: {type: String, required: true},
         from: {type: String, required: true},
-        value: {type: Number, required: true}
+        value: {type: Number, required: true},
+        date: {type: Date, default: Date.now},
     })
 
     schema.statics.CREATE = function (data) {
@@ -18,8 +19,7 @@ module.exports = db => {
         })
     }
 
-    // the schema is useless so far
-    // we need to create a model using it
-    db.model('Transfer', schema); // if model name === collection name
+
+    db.model('Transfer', schema);
     debug("Transfer model created");
 }

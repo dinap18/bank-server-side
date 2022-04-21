@@ -4,7 +4,6 @@ const debug = require("debug");
 
 
 module.exports = db => {
-    // create a schema
     let schema = new mongoose.Schema({
         firstName: {type: String, required: true},
         lastName: {type: String, required: true},
@@ -16,14 +15,6 @@ module.exports = db => {
         phoneNumber: {type: String, required: true},
         userType: {type: String, required: true, enum: ["admin", "user"]}
     })
-    schema.methods.generateHash = function (password) {
-        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-    };
-
-// checking if password is valid
-    schema.methods.validPassword = function (password) {
-        return bcrypt.compareSync(password, this.local.password);
-    };
 
     schema.statics.CREATE = function (data) {
         return this.create({
@@ -38,8 +29,7 @@ module.exports = db => {
         })
     }
 
-    // the schema is useless so far
-    // we need to create a model using it
-    db.model('User', schema); // if model name === collection name
+
+    db.model('User', schema);
     debug("User model created");
 }

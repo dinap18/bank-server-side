@@ -30,6 +30,32 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
+
+app.set('secretKey', 'bankServerSecretKey');
+
+function validateUser(req, res, next) {
+    jwt.verify(req.headers['x-access-token'], req.app.get('secretKey'), function(err, decoded) {
+        if (err) {
+            res.json({status:"error", message: err.message, data:null});
+        }else{
+            // add user id to request
+            req.body.userId = decoded.id;
+            next();
+        }
+    });
+
+}
+
+// handle errors
+app.use(function(err, req, res, next) {
+    console.log(err);
+
+    if(err.status === 404)
+        res.status(404).json({message: "Not found"});
+    else
+        res.status(500).json({message: "Something looks wrong :( !!!"});
+});
+
 // routes ======================================================================
 let users = require(__dirname + '/routes/UserRoutes.js')
 app.use("/api/v1/user", users);
@@ -43,9 +69,16 @@ app.use("/api/v1/transfer", transfers);
 let levCoins = require(__dirname + '/routes/LevCoinRoutes.js')
 app.use("/api/v1/levcoin", levCoins);
 
+let auth = require(__dirname + '/routes/AuthRoutes.js')
+app.use("/api/v1/auth", auth);
+
 
 
 // launch ======================================================================
 let server = app.listen(port);
 
 console.log('The magic happens on port ' + port);
+
+const currency = require(__dirname +"/core/Currency")
+const jwt = require("jsonwebtoken");
+
