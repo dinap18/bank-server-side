@@ -27,5 +27,17 @@ module.exports = class Currency {
 
         return result
     }
+    static async getShekelDollarRate() {
+
+        let currencyConverter = new CC({from: "ILS", to: "USD"});
+
+        let result = 0;
+
+        await currencyConverter.rates().then((response) => {
+            result = response;
+        })
+
+        return result
+    }
 
 }

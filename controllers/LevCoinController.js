@@ -1,21 +1,22 @@
 const levCoinService = require("../services/LevCoinService");
 
-module.exports = class LevCoin{
+module.exports = class LevCoin {
 
-    static async apiGetAllLevCoins(req, res, next){
+    static async apiGetAllLevCoins(req, res, next) {
         try {
             const levCoins = await levCoinService.getAllLevCoins();
-            if(!levCoins){
+            if (!levCoins) {
                 res.status(404).json("There are no LevCoins yet!")
             }
             res.json(levCoins);
         } catch (error) {
+            console.log(error)
             res.status(500).json({error: error})
         }
 
     }
 
-    static async apiGetLevCoinById(req, res, next){
+    static async apiGetLevCoinById(req, res, next) {
         try {
             let id = req.params.id || {};
             const user = await levCoinService.getLevCoinById(id);
@@ -25,12 +26,23 @@ module.exports = class LevCoin{
         }
     }
 
-    static async apiCreateLevCoin(req, res, next){
+    static async apiCreateLevCoin(req, res, next) {
         try {
 
-            const createdLevCoin =  await levCoinService.createLevCoin(req.body);
+            const levCoins = await levCoinService.getAllLevCoins();
+
+            if (levCoins !== undefined) {
+                req.body.value = 1 - (levCoins.length / 100)
+            } else {
+                req.body.value = 1
+            }
+            if (req.body.value <= 0) {
+                req.body.value = 0.01
+            }
+            const createdLevCoin = await levCoinService.createLevCoin(req.body);
             res.json(createdLevCoin);
         } catch (error) {
+            console.log(error)
             res.status(500).json({error: error});
         }
     }
