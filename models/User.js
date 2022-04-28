@@ -29,7 +29,9 @@ module.exports = db => {
         })
     }
 
-
     db.model('User', schema);
+
+
+
     debug("User model created");
 }

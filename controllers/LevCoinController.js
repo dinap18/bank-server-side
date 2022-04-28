@@ -29,16 +29,6 @@ module.exports = class LevCoin {
     static async apiCreateLevCoin(req, res, next) {
         try {
 
-            const levCoins = await levCoinService.getAllLevCoins();
-
-            if (levCoins !== undefined) {
-                req.body.value = 1 - (levCoins.length / 100)
-            } else {
-                req.body.value = 1
-            }
-            if (req.body.value <= 0) {
-                req.body.value = 0.01
-            }
             const createdLevCoin = await levCoinService.createLevCoin(req.body);
             res.json(createdLevCoin);
         } catch (error) {

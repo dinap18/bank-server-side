@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const user = require("../models/")("User");
 const ObjectId = require('mongodb').ObjectId;
+const levCoinService = require('../services/LevCoinService')
 
 module.exports = class UserService {
     static async getAllUsers() {
@@ -16,7 +17,13 @@ module.exports = class UserService {
             const saltOrRounds = 10
             const hashedPassword = await bcrypt.hash(data.password, saltOrRounds)
             data.password = hashedPassword
-            return await user.create(data);
+            let createdUser = await user.create(data);
+            if (data.accountCurrency == "LEVCOIN") {
+                for (let i = 0; i < data.accountBalance; i++) {
+                    await levCoinService.createLevCoin(createdUser._id)
+                }
+            }
+            return createdUser
         } catch (error) {
             console.log(error);
         }
@@ -34,6 +41,9 @@ module.exports = class UserService {
     static async updateUser(updatedUser, id) {
         try {
             const query = {_id: new ObjectId(id)}
+            if (updatedUser["accountBalance"] != undefined) {
+                delete updatedUser["accountBalance"]
+            }
             return await user.updateOne(
                 query, updatedUser
             );
@@ -51,4 +61,5 @@ module.exports = class UserService {
         }
 
     }
+
 }

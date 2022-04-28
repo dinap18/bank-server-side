@@ -12,6 +12,16 @@ module.exports = class LevCoinService {
 
     static async createLevCoin(data) {
         try {
+            const levCoins = await this.getAllLevCoins();
+
+            if (levCoins !== undefined) {
+                data.value = 1 - (levCoins.length / 100)
+            } else {
+                data.value = 1
+            }
+            if (data.value <= 0) {
+                data.value = 0.01
+            }
             return await levCoin.create(data);
         } catch (error) {
             console.log(error);
