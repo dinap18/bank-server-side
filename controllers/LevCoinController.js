@@ -16,10 +16,10 @@ module.exports = class LevCoin {
 
     }
 
-    static async apiGetLevCoinById(req, res, next) {
+    static async apiGetLevCoinByUserId(req, res, next) {
         try {
             let id = req.params.id || {};
-            const user = await levCoinService.getLevCoinById(id);
+            const user = await levCoinService.getLevCoinByUserId(id, req.body.currency);
             res.json(user);
         } catch (error) {
             res.status(500).json({error: error})
@@ -31,6 +31,17 @@ module.exports = class LevCoin {
 
             const createdLevCoin = await levCoinService.createLevCoin(req.body);
             res.json(createdLevCoin);
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({error: error});
+        }
+    }
+
+    static async apiGetLevCoinValue(req, res, next) {
+        try {
+            let currency = req.params.currency || "USD";
+            const levCoinValue = await levCoinService.getCurrentLevCoinValue(currency);
+            res.json(levCoinValue);
         } catch (error) {
             console.log(error)
             res.status(500).json({error: error});

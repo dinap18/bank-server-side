@@ -12,12 +12,13 @@ var port = process.env.PORT || 8000;
 var passport = require('passport');
 var flash = require('connect-flash');
 
+var startOfDay = require('date-fns/startOfDay')
 
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-
+var LoanController =require('./controllers/LoanController')
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
@@ -89,7 +90,7 @@ const client = new MongoClient(uri);
 
 client.connect();
 
-client.once("open", () => {
+client.once("open", (filter, options) => {
     console.log("MongoDB database connected");
     const database = client.db("bank-app");
     const userCollection = database.collection("users");
@@ -97,24 +98,32 @@ client.once("open", () => {
     const userPipeline = [{$match: {accountBalance: {$lte: 0}}}];
     const userChangeStream = userCollection.watch(userPipeline);
 
-    const loanCollection = database.collection("loans");
-
-    const loanPipeline = [
-        {$match: {and: [{accountBalance: {$lte: new Date(Date.now())}}, {moneySent: false}]}}
-    ];
-    const loanChangeStream = loanCollection.watch(loanPipeline);
-
 
     userChangeStream.on("change", (change) => {
 
 
         console.log("account balance less than zero \t")
     })
-    loanChangeStream.on("change", (change) => {
 
 
-        console.log("loan money \t")
-    })
+    const loanCollection = database.collection("loans");
+    loanCollection.find({
+        date: {$lte: new Date()},
+        moneySent: false
+    }).toArray(async function (err, docs) {
+        if (docs)
+        {
+            for (let i = 0; i < docs.length; i++) {
+                await LoanController.apiTransferCreatedLoan(docs[i])
+            }
+
+        } else
+        {
+            console.log("No loans need tp be transferred");
+        }
+    });
 
 
 })
+
+

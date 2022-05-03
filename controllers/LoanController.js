@@ -35,4 +35,16 @@ module.exports = class Loan{
         }
     }
 
+
+
+    static async apiTransferCreatedLoan(loan){
+        try {
+
+            const createdLoan =  await LoanService.transferLoan(loan);
+        } catch (error) {
+            console.log("failed to transfer loan")
+        }
+    }
+
+
 }
