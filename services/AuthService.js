@@ -11,7 +11,7 @@ module.exports = class AuthService {
 
                 const token = jwt.sign({id: userInfo._id}, req.app.get('secretKey'), {expiresIn: '1h'});
 
-                return {user: userInfo, token: token};
+                return {token: token};
             }
             return null;
 

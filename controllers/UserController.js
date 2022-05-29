@@ -23,6 +23,14 @@ module.exports = class User{
         } catch (error) {
             res.status(500).json({error: error})
         }
+    }static async apiGetUserByUsername(req, res, next){
+        try {
+            let id = req.params.id || {};
+            const user = await userService.getUserByUsername(id);
+            res.json(user);
+        } catch (error) {
+            res.status(500).json({error: error})
+        }
     }
 
     static async apiCreateUser(req, res, next){

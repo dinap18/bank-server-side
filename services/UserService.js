@@ -37,6 +37,13 @@ module.exports = class UserService {
             console.log(`User not found. ${error}`)
         }
     }
+ static async getUserByUsername(userId) {
+        try {
+            return await user.findOne({username: userId});
+        } catch (error) {
+            console.log(`User not found. ${error}`)
+        }
+    }
 
     static async updateUser(updatedUser, id) {
         try {

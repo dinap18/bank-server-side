@@ -5,7 +5,7 @@ const UserCtrl = require("../controllers/UserController");
 
 router.get("/", UserCtrl.apiGetAllUsers);
 router.post("/", UserCtrl.apiCreateUser);
-router.get("/:id", UserCtrl.apiGetUserById);
+router.get("/:id", UserCtrl.apiGetUserByUsername);
 router.patch("/:id", UserCtrl.apiUpdateUser);
 router.delete("/:id", UserCtrl.apiDeleteUser);
 

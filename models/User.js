@@ -23,6 +23,7 @@ module.exports = db => {
             "username": data.username,
             "password": data.password,
             "accountBalance": data.accountBalance,
+            "accountCurrency": data.accountCurrency,
             "email": data.email,
             "phoneNumber": data.phoneNumber,
             "userType": data.userType
