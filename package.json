@@ -29,6 +29,7 @@
     "mongodb": "^4.5.0",
     "mongoose": "^6.3.0",
     "morgan": "^1.10.0",
-    "passport": "^0.5.2"
+    "passport": "^0.5.2",
+    "socket.io": "^4.5.1"
   }
 }

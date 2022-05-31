@@ -12,7 +12,7 @@ var port = process.env.PORT || 8000;
 var passport = require('passport');
 var flash = require('connect-flash');
 
-var startOfDay = require('date-fns/startOfDay')
+const socket = require("socket.io");
 
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -73,11 +73,19 @@ app.use("/api/v1/levcoin", levCoins);
 let auth = require(__dirname + '/routes/AuthRoutes.js')
 app.use("/api/v1/auth", auth);
 
+let chat = require(__dirname + '/routes/ChatRoutes.js')
+app.use("/api/v1/chat", chat);
+
 
 // launch ======================================================================
 let server = app.listen(port);
 
 console.log('The magic happens on port ' + port);
+
+const io = socket(server,{cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+    }});
 
 const currency = require(__dirname + "/core/Currency")
 const jwt = require("jsonwebtoken");
