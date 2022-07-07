@@ -45,12 +45,9 @@ module.exports = class UserService {
         }
     }
 
-    static async updateUser(updatedUser, id) {
+    static async updateUser(id,updatedUser) {
         try {
             const query = {_id: new ObjectId(id)}
-            if (updatedUser["accountBalance"] != undefined) {
-                delete updatedUser["accountBalance"]
-            }
             return await user.updateOne(
                 query, updatedUser
             );

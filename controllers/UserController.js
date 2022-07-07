@@ -46,7 +46,7 @@ module.exports = class User{
     static async apiUpdateUser(req, res, next) {
         try {
             const userId = req.params.id;
-            const updatedUser = await userService.updateUser(req, userId);
+            const updatedUser = await userService.updateUser(userId,req.body);
 
             if (updatedUser.modifiedCount === 0) {
                 throw new Error("Unable to update user, error occurred");
@@ -55,6 +55,7 @@ module.exports = class User{
             res.sendStatus(200);
 
         } catch (error) {
+            console.log(error)
             res.sendStatus(500);
         }
     }
