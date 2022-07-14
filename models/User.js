@@ -13,6 +13,7 @@ module.exports = db => {
         accountCurrency: {type: String, required: true},
         email: {type: String, required: true},
         phoneNumber: {type: String, required: true},
+        adminApproved: {type: Boolean, required: false},
         userType: {type: String, required: true, enum: ["admin", "user"]}
     })
 
@@ -26,12 +27,13 @@ module.exports = db => {
             "accountCurrency": data.accountCurrency,
             "email": data.email,
             "phoneNumber": data.phoneNumber,
-            "userType": data.userType
+            "userType": data.userType,
+            "adminApproved": true
+
         })
     }
 
     db.model('User', schema);
-
 
 
     debug("User model created");

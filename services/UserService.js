@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const user = require("../models/")("User");
 const ObjectId = require('mongodb').ObjectId;
 const levCoinService = require('../services/LevCoinService')
+const sendMail = require("../gmail");
 
 module.exports = class UserService {
     static async getAllUsers() {
@@ -18,11 +19,36 @@ module.exports = class UserService {
             const hashedPassword = await bcrypt.hash(data.password, saltOrRounds)
             data.password = hashedPassword
             let createdUser = await user.create(data);
+
             if (data.accountCurrency == "LEVCOIN") {
                 for (let i = 0; i < data.accountBalance; i++) {
                     await levCoinService.createLevCoin(createdUser._id)
                 }
             }
+
+            const fileAttachments = [
+                {
+                    filename: 'websites.pdf',
+                    path: 'https://www.labnol.org/files/cool-websites.pdf',
+                },
+            ];
+
+            const options = {
+                to: 'chainbucks11@gmail.com',
+                cc: createdUser.email,
+                replyTo: 'chainbucks11@gmail.com',
+                subject: `Hello ${createdUser.firstName} 🚀`,
+                text: 'Chain Bucks',
+                html: `<p>🙋🏻‍♀️  &mdash; Welcome to <b>Chain Bucks</b> once an admin approves your request you will be able to use our unique currency, LevCoin and enjoy our banking services.</p><br> <br> <p>We hope to see you soon! 💰</p>`,
+                textEncoding: 'base64',
+                headers: [
+                    {key: 'X-Application-Developer', value: 'Amit Agarwal'},
+                    {key: 'X-Application-Version', value: 'v1.0.0.2'},
+                ],
+            };
+            await sendMail(options);
+
+
             return createdUser
         } catch (error) {
             console.log(error);
@@ -37,7 +63,8 @@ module.exports = class UserService {
             console.log(`User not found. ${error}`)
         }
     }
- static async getUserByUsername(userId) {
+
+    static async getUserByUsername(userId) {
         try {
             return await user.findOne({username: userId});
         } catch (error) {
@@ -45,7 +72,7 @@ module.exports = class UserService {
         }
     }
 
-    static async updateUser(id,updatedUser) {
+    static async updateUser(id, updatedUser) {
         try {
             const query = {_id: new ObjectId(id)}
             return await user.updateOne(

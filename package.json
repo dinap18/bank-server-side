@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "connect-flash": "^0.1.1",
@@ -24,11 +25,13 @@
     "exchange-rates-api": "^1.1.0",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
+    "googleapis": "^105.0.0",
     "jsonwebtoken": "^8.5.1",
     "money": "^0.2.0",
     "mongodb": "^4.5.0",
     "mongoose": "^6.3.0",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.7.7",
     "passport": "^0.5.2",
     "socket.io": "^4.5.1"
   }

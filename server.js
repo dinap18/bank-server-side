@@ -76,6 +76,9 @@ app.use("/api/v1/auth", auth);
 let chat = require(__dirname + '/routes/ChatRoutes.js')
 app.use("/api/v1/chat", chat);
 
+let gmail = require(__dirname + '/routes/MailRoutes.js')
+app.use("/api/v1/gmail", gmail);
+
 
 // launch ======================================================================
 let server = app.listen(port);
