@@ -24,6 +24,24 @@ module.exports = class Loan{
             res.status(500).json({error: error})
         }
     }
+    static async apiGetLoansToById(req, res, next){
+        try {
+            let id = req.params.id || {};
+            const loan = await LoanService.getLoansToById(id);
+            res.json(loan);
+        } catch (error) {
+            res.status(500).json({error: error})
+        }
+    }
+    static async apiGetLoansFromById(req, res, next){
+        try {
+            let id = req.params.id || {};
+            const loan = await LoanService.getLoansFromById(id);
+            res.json(loan);
+        } catch (error) {
+            res.status(500).json({error: error})
+        }
+    }
 
     static async apiCreateLoan(req, res, next){
         try {

@@ -30,7 +30,7 @@ app.use(session({secret: 'secret'})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-
+app.disable('etag');
 
 app.set('secretKey', 'bankServerSecretKey');
 

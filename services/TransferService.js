@@ -1,7 +1,7 @@
 const Transfer = require("../models/")("Transfer");
 const {AuditLogBlockchain} = require("../services/AuditLogChainService")
 const UserService = require("../services/UserService")
-const Currency=require("../core/Currency")
+const Currency = require("../core/Currency")
 module.exports = class TransferService {
     static async getAllTransfers() {
         try {
@@ -17,15 +17,14 @@ module.exports = class TransferService {
 
             const to = await UserService.getUserById(data.to);
 
-            const from =   await UserService.getUserById(data.from);
+            const from = await UserService.getUserById(data.from);
 
             if (!to || !from || data.value < 0) {
                 throw new Error("invalid transfer details");
             }
 
-            if(to.accountCurrency!==from.accountCurrency)
-            {
-                data.value=await Currency.convertCurrency(from.accountCurrency,to.accountCurrency,data.value)
+            if (to.accountCurrency !== from.accountCurrency) {
+                data.value = await Currency.convertCurrency(from.accountCurrency, to.accountCurrency, data.value)
             }
 
             let blockChain = new AuditLogBlockchain();
@@ -55,6 +54,24 @@ module.exports = class TransferService {
     static async getTransferById(transferId) {
         try {
             return await Transfer.findById({_id: transferId});
+
+        } catch (error) {
+            console.log(`Transfer not found. ${error}`)
+        }
+    }
+
+    static async getTransfersToById(transferId) {
+        try {
+            return await Transfer.find({to: transferId});
+
+        } catch (error) {
+            console.log(`Transfer not found. ${error}`)
+        }
+    }
+
+    static async getTransfersFromById(transferId) {
+        try {
+            return await Transfer.find({from: transferId});
 
         } catch (error) {
             console.log(`Transfer not found. ${error}`)

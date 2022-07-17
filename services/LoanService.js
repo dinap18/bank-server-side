@@ -25,7 +25,7 @@ module.exports = class LoanService {
 
             if (!(data.date && new Date(data.date) > new Date(Date.now()))) {
 
-                if (to.accountCurrency !== from.accountCurrency) {
+                if (to.accountCurrency !== from.accountCurrency ) {
                     data.value = await Currency.convertCurrency(from.accountCurrency, to.accountCurrency, data.value)
                 }
 
@@ -111,6 +111,22 @@ module.exports = class LoanService {
     static async getLoanById(loanId) {
         try {
             return await Loan.findById({_id: loanId});
+        } catch (error) {
+            console.log(`Loan not found. ${error}`)
+        }
+    }
+
+    static async getLoansToById(loanId) {
+        try {
+            return await Loan.find({to: loanId});
+        } catch (error) {
+            console.log(`Loan not found. ${error}`)
+        }
+    }
+
+    static async getLoansFromById(loanId) {
+        try {
+            return await Loan.find({from: loanId});
         } catch (error) {
             console.log(`Loan not found. ${error}`)
         }
