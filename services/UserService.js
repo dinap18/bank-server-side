@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const user = require("../models/")("User");
 const ObjectId = require('mongodb').ObjectId;
 const levCoinService = require('../services/LevCoinService')
-const sendMail = require("../gmail");
+const {sendMail} = require( "../gmail");
 
 module.exports = class UserService {
     static async getAllUsers() {

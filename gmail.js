@@ -1,14 +1,13 @@
-const { google } = require('googleapis');
+const {google} = require('googleapis');
 const MailComposer = require('nodemailer/lib/mail-composer');
 const credentials = require('./credentials.json');
 const tokens = require('./token.json');
-const axios = require('axios');
-
+const _ = require('lodash');
 const getGmailService = () => {
-    const { client_secret, client_id, redirect_uris } = credentials.installed;
+    const {client_secret, client_id, redirect_uris} = credentials.installed;
     const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
     oAuth2Client.setCredentials(tokens);
-    const gmail = google.gmail({ version: 'v1', auth: oAuth2Client });
+    const gmail = google.gmail({version: 'v1', auth: oAuth2Client});
     return gmail;
 };
 
@@ -25,7 +24,7 @@ const createMail = async (options) => {
 const sendMail = async (options) => {
     const gmail = getGmailService();
     const rawMessage = await createMail(options);
-    const { data: { id } = {} } = await gmail.users.messages.send({
+    const {data: {id} = {}} = await gmail.users.messages.send({
         userId: 'me',
         resource: {
             raw: rawMessage,
@@ -34,7 +33,29 @@ const sendMail = async (options) => {
     return id;
 };
 
-const listMessages = async () => {
-    return axios.get(`https://gmail.googleapis.com/gmail/v1/users/334577680333-0l77aakbduqmm1dgn0l7ns1hrr2b1s7u.apps.googleusercontent.com/messages`)
+const listMessages = async (req, res) => {
+    try {
+
+        const gmail = getGmailService();
+        const mailList = await gmail.users.messages.list({
+            userId: 'me',
+            q: 'in:inbox is:unread from:chainbucks11@gmail.com',
+        });
+        const messages = await Promise.all(_.map(mailList.data.messages, async x => await gmail.users.messages.get({
+            userId: 'me',
+            id: x.id,
+            format: "METADATA",
+            metadataHeaders: "Cc",
+        })))
+        const result =await Promise.all(_.map(messages,m =>
+              m["data"]["payload"]["headers"]
+        ))
+        console.log("here")
+        console.log(messages.length)
+        res.json(result);
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error: error});
+    }
 }
-module.exports = sendMail;
+module.exports = {sendMail, listMessages};

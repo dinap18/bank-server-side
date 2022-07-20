@@ -37,8 +37,11 @@ module.exports = class TransferService {
             if (!status) {
                 throw new Error("error validating transfer");
             }
-            to.accountBalance += data.value;
-            from.accountBalance -= data.value;
+
+
+            to.accountBalance += parseInt(to.accountBalance) + parseInt(data.value) -1 ;
+            from.accountBalance = parseInt(from.accountBalance) - parseInt(data.value);
+
 
             await UserService.updateUser(to, data.to);
             await UserService.updateUser(from, data.from);

@@ -47,8 +47,8 @@ module.exports = class LoanService {
                 if (!status) {
                     throw new Error("error validating loan");
                 }
-                to.accountBalance += data.value;
-                from.accountBalance -= data.value;
+                to.accountBalance += parseInt(to.accountBalance) + parseInt(data.value) -1 ;
+                from.accountBalance = parseInt(from.accountBalance) - parseInt(data.value);
 
                 data.moneySent = true;
 

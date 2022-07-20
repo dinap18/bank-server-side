@@ -1,0 +1,605 @@
+[
+  {
+    "config": {
+      "url": "https://gmail.googleapis.com/gmail/v1/users/me/messages/1821c3a8c57e2fe7?format=METADATA&metadataHeaders=Cc",
+      "method": "GET",
+      "userAgentDirectives": [
+        {
+          "product": "google-api-nodejs-client",
+          "version": "6.0.0",
+          "comment": "gzip"
+        }
+      ],
+      "headers": {
+        "x-goog-api-client": "gdcl/6.0.0 gl-node/16.14.2 auth/8.1.1",
+        "Accept-Encoding": "gzip",
+        "User-Agent": "google-api-nodejs-client/6.0.0 (gzip)",
+        "Authorization": "Bearer ya29.A0AVA9y1vXp1-6ePWDCSF4dDnc6fefWbAB9pgqPP7ks__tCMqlym8_UedoGbZKtr-QIaqpcPKB8uGYtWyndE52lyUWsyQEX7f2oSIlYGiV-Ow64OcVawVSYNQYF0D9iBjw9I4xQaMD-vUGnh8DDpx_O4HyUWsvYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4OVdzUFM0VF9veWxKa1Q1MW94eUJ0UQ0163",
+        "Accept": "application/json"
+      },
+      "params": {
+        "format": "METADATA",
+        "metadataHeaders": "Cc"
+      },
+      "retry": true,
+      "responseType": "json"
+    },
+    "data": {
+      "id": "1821c3a8c57e2fe7",
+      "threadId": "1821c3a8c57e2fe7",
+      "labelIds": [
+        "UNREAD",
+        "SENT",
+        "INBOX"
+      ],
+      "snippet": "🙋🏻‍♀️ — Welcome to Chain Bucks once an admin approves your request you will be able to use our unique currency, LevCoin and enjoy our banking services. We hope to see you soon! 💰",
+      "payload": {
+        "mimeType": "multipart/alternative",
+        "headers": [
+          {
+            "name": "Cc",
+            "value": "odel@odel.com"
+          }
+        ]
+      },
+      "sizeEstimate": 1163,
+      "historyId": "2712",
+      "internalDate": "1658330975000"
+    },
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+      "cache-control": "private",
+      "connection": "close",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 20 Jul 2022 18:10:43 GMT",
+      "server": "ESF",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-xss-protection": "0"
+    },
+    "status": 200,
+    "statusText": "OK",
+    "request": {
+      "responseURL": "https://gmail.googleapis.com/gmail/v1/users/me/messages/1821c3a8c57e2fe7?format=METADATA&metadataHeaders=Cc"
+    }
+  },
+  {
+    "config": {
+      "url": "https://gmail.googleapis.com/gmail/v1/users/me/messages/182112c1885a78bd?format=METADATA&metadataHeaders=Cc",
+      "method": "GET",
+      "userAgentDirectives": [
+        {
+          "product": "google-api-nodejs-client",
+          "version": "6.0.0",
+          "comment": "gzip"
+        }
+      ],
+      "headers": {
+        "x-goog-api-client": "gdcl/6.0.0 gl-node/16.14.2 auth/8.1.1",
+        "Accept-Encoding": "gzip",
+        "User-Agent": "google-api-nodejs-client/6.0.0 (gzip)",
+        "Authorization": "Bearer ya29.A0AVA9y1vXp1-6ePWDCSF4dDnc6fefWbAB9pgqPP7ks__tCMqlym8_UedoGbZKtr-QIaqpcPKB8uGYtWyndE52lyUWsyQEX7f2oSIlYGiV-Ow64OcVawVSYNQYF0D9iBjw9I4xQaMD-vUGnh8DDpx_O4HyUWsvYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4OVdzUFM0VF9veWxKa1Q1MW94eUJ0UQ0163",
+        "Accept": "application/json"
+      },
+      "params": {
+        "format": "METADATA",
+        "metadataHeaders": "Cc"
+      },
+      "retry": true,
+      "responseType": "json"
+    },
+    "data": {
+      "id": "182112c1885a78bd",
+      "threadId": "182112c1885a78bd",
+      "labelIds": [
+        "UNREAD",
+        "SENT",
+        "INBOX"
+      ],
+      "snippet": "🙋🏻‍♀️ — Welcome to Chain Bucks once an admin approves your request you will be able to use our unique currency, LevCoin and enjoy our banking services. We hope to see you soon! 💰",
+      "payload": {
+        "mimeType": "multipart/alternative",
+        "headers": [
+          {
+            "name": "Cc",
+            "value": "odel@odel.com"
+          }
+        ]
+      },
+      "sizeEstimate": 1159,
+      "historyId": "2578",
+      "internalDate": "1658145478000"
+    },
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+      "cache-control": "private",
+      "connection": "close",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 20 Jul 2022 18:10:43 GMT",
+      "server": "ESF",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-xss-protection": "0"
+    },
+    "status": 200,
+    "statusText": "OK",
+    "request": {
+      "responseURL": "https://gmail.googleapis.com/gmail/v1/users/me/messages/182112c1885a78bd?format=METADATA&metadataHeaders=Cc"
+    }
+  },
+  {
+    "config": {
+      "url": "https://gmail.googleapis.com/gmail/v1/users/me/messages/182112b981bbb2ef?format=METADATA&metadataHeaders=Cc",
+      "method": "GET",
+      "userAgentDirectives": [
+        {
+          "product": "google-api-nodejs-client",
+          "version": "6.0.0",
+          "comment": "gzip"
+        }
+      ],
+      "headers": {
+        "x-goog-api-client": "gdcl/6.0.0 gl-node/16.14.2 auth/8.1.1",
+        "Accept-Encoding": "gzip",
+        "User-Agent": "google-api-nodejs-client/6.0.0 (gzip)",
+        "Authorization": "Bearer ya29.A0AVA9y1vXp1-6ePWDCSF4dDnc6fefWbAB9pgqPP7ks__tCMqlym8_UedoGbZKtr-QIaqpcPKB8uGYtWyndE52lyUWsyQEX7f2oSIlYGiV-Ow64OcVawVSYNQYF0D9iBjw9I4xQaMD-vUGnh8DDpx_O4HyUWsvYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4OVdzUFM0VF9veWxKa1Q1MW94eUJ0UQ0163",
+        "Accept": "application/json"
+      },
+      "params": {
+        "format": "METADATA",
+        "metadataHeaders": "Cc"
+      },
+      "retry": true,
+      "responseType": "json"
+    },
+    "data": {
+      "id": "182112b981bbb2ef",
+      "threadId": "182112b981bbb2ef",
+      "labelIds": [
+        "UNREAD",
+        "SENT",
+        "INBOX"
+      ],
+      "snippet": "🙋🏻‍♀️ — Welcome to Chain Bucks once an admin approves your request you will be able to use our unique currency, LevCoin and enjoy our banking services. We hope to see you soon! 💰",
+      "payload": {
+        "mimeType": "multipart/alternative",
+        "headers": [
+          {
+            "name": "Cc",
+            "value": "odel@odel.com"
+          }
+        ]
+      },
+      "sizeEstimate": 1163,
+      "historyId": "2577",
+      "internalDate": "1658145445000"
+    },
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+      "cache-control": "private",
+      "connection": "close",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 20 Jul 2022 18:10:43 GMT",
+      "server": "ESF",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-xss-protection": "0"
+    },
+    "status": 200,
+    "statusText": "OK",
+    "request": {
+      "responseURL": "https://gmail.googleapis.com/gmail/v1/users/me/messages/182112b981bbb2ef?format=METADATA&metadataHeaders=Cc"
+    }
+  },
+  {
+    "config": {
+      "url": "https://gmail.googleapis.com/gmail/v1/users/me/messages/18210f7cb4951aa7?format=METADATA&metadataHeaders=Cc",
+      "method": "GET",
+      "userAgentDirectives": [
+        {
+          "product": "google-api-nodejs-client",
+          "version": "6.0.0",
+          "comment": "gzip"
+        }
+      ],
+      "headers": {
+        "x-goog-api-client": "gdcl/6.0.0 gl-node/16.14.2 auth/8.1.1",
+        "Accept-Encoding": "gzip",
+        "User-Agent": "google-api-nodejs-client/6.0.0 (gzip)",
+        "Authorization": "Bearer ya29.A0AVA9y1vXp1-6ePWDCSF4dDnc6fefWbAB9pgqPP7ks__tCMqlym8_UedoGbZKtr-QIaqpcPKB8uGYtWyndE52lyUWsyQEX7f2oSIlYGiV-Ow64OcVawVSYNQYF0D9iBjw9I4xQaMD-vUGnh8DDpx_O4HyUWsvYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4OVdzUFM0VF9veWxKa1Q1MW94eUJ0UQ0163",
+        "Accept": "application/json"
+      },
+      "params": {
+        "format": "METADATA",
+        "metadataHeaders": "Cc"
+      },
+      "retry": true,
+      "responseType": "json"
+    },
+    "data": {
+      "id": "18210f7cb4951aa7",
+      "threadId": "18210f7cb4951aa7",
+      "labelIds": [
+        "UNREAD",
+        "SENT",
+        "INBOX"
+      ],
+      "snippet": "🙋🏻‍♀️ — Welcome to Chain Bucks once an admin approves your request you will be able to use our unique currency, LevCoin and enjoy our banking services. We hope to see you soon! 💰",
+      "payload": {
+        "mimeType": "multipart/alternative",
+        "headers": [
+          {
+            "name": "Cc",
+            "value": "odel@odel.com"
+          }
+        ]
+      },
+      "sizeEstimate": 1159,
+      "historyId": "2576",
+      "internalDate": "1658142050000"
+    },
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+      "cache-control": "private",
+      "connection": "close",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 20 Jul 2022 18:10:43 GMT",
+      "server": "ESF",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-xss-protection": "0"
+    },
+    "status": 200,
+    "statusText": "OK",
+    "request": {
+      "responseURL": "https://gmail.googleapis.com/gmail/v1/users/me/messages/18210f7cb4951aa7?format=METADATA&metadataHeaders=Cc"
+    }
+  },
+  {
+    "config": {
+      "url": "https://gmail.googleapis.com/gmail/v1/users/me/messages/18210e28fc55dc6a?format=METADATA&metadataHeaders=Cc",
+      "method": "GET",
+      "userAgentDirectives": [
+        {
+          "product": "google-api-nodejs-client",
+          "version": "6.0.0",
+          "comment": "gzip"
+        }
+      ],
+      "headers": {
+        "x-goog-api-client": "gdcl/6.0.0 gl-node/16.14.2 auth/8.1.1",
+        "Accept-Encoding": "gzip",
+        "User-Agent": "google-api-nodejs-client/6.0.0 (gzip)",
+        "Authorization": "Bearer ya29.A0AVA9y1vXp1-6ePWDCSF4dDnc6fefWbAB9pgqPP7ks__tCMqlym8_UedoGbZKtr-QIaqpcPKB8uGYtWyndE52lyUWsyQEX7f2oSIlYGiV-Ow64OcVawVSYNQYF0D9iBjw9I4xQaMD-vUGnh8DDpx_O4HyUWsvYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4OVdzUFM0VF9veWxKa1Q1MW94eUJ0UQ0163",
+        "Accept": "application/json"
+      },
+      "params": {
+        "format": "METADATA",
+        "metadataHeaders": "Cc"
+      },
+      "retry": true,
+      "responseType": "json"
+    },
+    "data": {
+      "id": "18210e28fc55dc6a",
+      "threadId": "18210e28fc55dc6a",
+      "labelIds": [
+        "UNREAD",
+        "SENT",
+        "INBOX"
+      ],
+      "snippet": "🙋🏻‍♀️ — Welcome to Chain Bucks once an admin approves your request you will be able to use our unique currency, LevCoin and enjoy our banking services. We hope to see you soon! 💰",
+      "payload": {
+        "mimeType": "multipart/alternative",
+        "headers": [
+          {
+            "name": "Cc",
+            "value": "odel@odel.com"
+          }
+        ]
+      },
+      "sizeEstimate": 1159,
+      "historyId": "2575",
+      "internalDate": "1658140659000"
+    },
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+      "cache-control": "private",
+      "connection": "close",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 20 Jul 2022 18:10:43 GMT",
+      "server": "ESF",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-xss-protection": "0"
+    },
+    "status": 200,
+    "statusText": "OK",
+    "request": {
+      "responseURL": "https://gmail.googleapis.com/gmail/v1/users/me/messages/18210e28fc55dc6a?format=METADATA&metadataHeaders=Cc"
+    }
+  },
+  {
+    "config": {
+      "url": "https://gmail.googleapis.com/gmail/v1/users/me/messages/18210de7dc9d2f16?format=METADATA&metadataHeaders=Cc",
+      "method": "GET",
+      "userAgentDirectives": [
+        {
+          "product": "google-api-nodejs-client",
+          "version": "6.0.0",
+          "comment": "gzip"
+        }
+      ],
+      "headers": {
+        "x-goog-api-client": "gdcl/6.0.0 gl-node/16.14.2 auth/8.1.1",
+        "Accept-Encoding": "gzip",
+        "User-Agent": "google-api-nodejs-client/6.0.0 (gzip)",
+        "Authorization": "Bearer ya29.A0AVA9y1vXp1-6ePWDCSF4dDnc6fefWbAB9pgqPP7ks__tCMqlym8_UedoGbZKtr-QIaqpcPKB8uGYtWyndE52lyUWsyQEX7f2oSIlYGiV-Ow64OcVawVSYNQYF0D9iBjw9I4xQaMD-vUGnh8DDpx_O4HyUWsvYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4OVdzUFM0VF9veWxKa1Q1MW94eUJ0UQ0163",
+        "Accept": "application/json"
+      },
+      "params": {
+        "format": "METADATA",
+        "metadataHeaders": "Cc"
+      },
+      "retry": true,
+      "responseType": "json"
+    },
+    "data": {
+      "id": "18210de7dc9d2f16",
+      "threadId": "18210de7dc9d2f16",
+      "labelIds": [
+        "UNREAD",
+        "SENT",
+        "INBOX"
+      ],
+      "snippet": "🙋🏻‍♀️ — Welcome to Chain Bucks once an admin approves your request you will be able to use our unique currency, LevCoin and enjoy our banking services. We hope to see you soon! 💰",
+      "payload": {
+        "mimeType": "multipart/alternative",
+        "headers": [
+          {
+            "name": "Cc",
+            "value": "odel.fhima@gmail.com"
+          }
+        ]
+      },
+      "sizeEstimate": 1166,
+      "historyId": "2574",
+      "internalDate": "1658140392000"
+    },
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+      "cache-control": "private",
+      "connection": "close",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 20 Jul 2022 18:10:43 GMT",
+      "server": "ESF",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-xss-protection": "0"
+    },
+    "status": 200,
+    "statusText": "OK",
+    "request": {
+      "responseURL": "https://gmail.googleapis.com/gmail/v1/users/me/messages/18210de7dc9d2f16?format=METADATA&metadataHeaders=Cc"
+    }
+  },
+  {
+    "config": {
+      "url": "https://gmail.googleapis.com/gmail/v1/users/me/messages/181fca67d1a8412b?format=METADATA&metadataHeaders=Cc",
+      "method": "GET",
+      "userAgentDirectives": [
+        {
+          "product": "google-api-nodejs-client",
+          "version": "6.0.0",
+          "comment": "gzip"
+        }
+      ],
+      "headers": {
+        "x-goog-api-client": "gdcl/6.0.0 gl-node/16.14.2 auth/8.1.1",
+        "Accept-Encoding": "gzip",
+        "User-Agent": "google-api-nodejs-client/6.0.0 (gzip)",
+        "Authorization": "Bearer ya29.A0AVA9y1vXp1-6ePWDCSF4dDnc6fefWbAB9pgqPP7ks__tCMqlym8_UedoGbZKtr-QIaqpcPKB8uGYtWyndE52lyUWsyQEX7f2oSIlYGiV-Ow64OcVawVSYNQYF0D9iBjw9I4xQaMD-vUGnh8DDpx_O4HyUWsvYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4OVdzUFM0VF9veWxKa1Q1MW94eUJ0UQ0163",
+        "Accept": "application/json"
+      },
+      "params": {
+        "format": "METADATA",
+        "metadataHeaders": "Cc"
+      },
+      "retry": true,
+      "responseType": "json"
+    },
+    "data": {
+      "id": "181fca67d1a8412b",
+      "threadId": "181fca67d1a8412b",
+      "labelIds": [
+        "UNREAD",
+        "SENT",
+        "INBOX"
+      ],
+      "snippet": "🙋🏻‍♀️ — Welcome to Chain Bucks once an admin approves your request you will be able to use our unique currency, LevCoin and enjoy our banking services. We hope to see you soon! 💰",
+      "payload": {
+        "mimeType": "multipart/alternative",
+        "headers": [
+          {
+            "name": "Cc",
+            "value": "odel.fhima@gmail.com"
+          }
+        ]
+      },
+      "sizeEstimate": 1166,
+      "historyId": "2137",
+      "internalDate": "1657801178000"
+    },
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+      "cache-control": "private",
+      "connection": "close",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 20 Jul 2022 18:10:43 GMT",
+      "server": "ESF",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-xss-protection": "0"
+    },
+    "status": 200,
+    "statusText": "OK",
+    "request": {
+      "responseURL": "https://gmail.googleapis.com/gmail/v1/users/me/messages/181fca67d1a8412b?format=METADATA&metadataHeaders=Cc"
+    }
+  },
+  {
+    "config": {
+      "url": "https://gmail.googleapis.com/gmail/v1/users/me/messages/181fc3f5bfba3c72?format=METADATA&metadataHeaders=Cc",
+      "method": "GET",
+      "userAgentDirectives": [
+        {
+          "product": "google-api-nodejs-client",
+          "version": "6.0.0",
+          "comment": "gzip"
+        }
+      ],
+      "headers": {
+        "x-goog-api-client": "gdcl/6.0.0 gl-node/16.14.2 auth/8.1.1",
+        "Accept-Encoding": "gzip",
+        "User-Agent": "google-api-nodejs-client/6.0.0 (gzip)",
+        "Authorization": "Bearer ya29.A0AVA9y1vXp1-6ePWDCSF4dDnc6fefWbAB9pgqPP7ks__tCMqlym8_UedoGbZKtr-QIaqpcPKB8uGYtWyndE52lyUWsyQEX7f2oSIlYGiV-Ow64OcVawVSYNQYF0D9iBjw9I4xQaMD-vUGnh8DDpx_O4HyUWsvYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4OVdzUFM0VF9veWxKa1Q1MW94eUJ0UQ0163",
+        "Accept": "application/json"
+      },
+      "params": {
+        "format": "METADATA",
+        "metadataHeaders": "Cc"
+      },
+      "retry": true,
+      "responseType": "json"
+    },
+    "data": {
+      "id": "181fc3f5bfba3c72",
+      "threadId": "181fc3f5bfba3c72",
+      "labelIds": [
+        "UNREAD",
+        "SENT",
+        "INBOX"
+      ],
+      "snippet": "🙋🏻‍♀️ — Welcome to Chain Bucks once an admin approves your request you will be able to use our unique currency, LevCoin and enjoy our banking services. We hope to see you soon! 💰",
+      "payload": {
+        "mimeType": "multipart/alternative",
+        "headers": [
+          {
+            "name": "Cc",
+            "value": "odel.fhima@gmail.com"
+          }
+        ]
+      },
+      "sizeEstimate": 1166,
+      "historyId": "2136",
+      "internalDate": "1657794419000"
+    },
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+      "cache-control": "private",
+      "connection": "close",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 20 Jul 2022 18:10:43 GMT",
+      "server": "ESF",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-xss-protection": "0"
+    },
+    "status": 200,
+    "statusText": "OK",
+    "request": {
+      "responseURL": "https://gmail.googleapis.com/gmail/v1/users/me/messages/181fc3f5bfba3c72?format=METADATA&metadataHeaders=Cc"
+    }
+  },
+  {
+    "config": {
+      "url": "https://gmail.googleapis.com/gmail/v1/users/me/messages/181fc3cce830b2e8?format=METADATA&metadataHeaders=Cc",
+      "method": "GET",
+      "userAgentDirectives": [
+        {
+          "product": "google-api-nodejs-client",
+          "version": "6.0.0",
+          "comment": "gzip"
+        }
+      ],
+      "headers": {
+        "x-goog-api-client": "gdcl/6.0.0 gl-node/16.14.2 auth/8.1.1",
+        "Accept-Encoding": "gzip",
+        "User-Agent": "google-api-nodejs-client/6.0.0 (gzip)",
+        "Authorization": "Bearer ya29.A0AVA9y1vXp1-6ePWDCSF4dDnc6fefWbAB9pgqPP7ks__tCMqlym8_UedoGbZKtr-QIaqpcPKB8uGYtWyndE52lyUWsyQEX7f2oSIlYGiV-Ow64OcVawVSYNQYF0D9iBjw9I4xQaMD-vUGnh8DDpx_O4HyUWsvYUNnWUtBVEFTQVRBU0ZRRTY1ZHI4OVdzUFM0VF9veWxKa1Q1MW94eUJ0UQ0163",
+        "Accept": "application/json"
+      },
+      "params": {
+        "format": "METADATA",
+        "metadataHeaders": "Cc"
+      },
+      "retry": true,
+      "responseType": "json"
+    },
+    "data": {
+      "id": "181fc3cce830b2e8",
+      "threadId": "181fc3cce830b2e8",
+      "labelIds": [
+        "UNREAD",
+        "SENT",
+        "INBOX"
+      ],
+      "snippet": "🙋🏻‍♀️ — Welcome to Chain Bucks once an admin approves your request you will be able to use our unique currency, LevCoin and enjoy our banking services. We hope to see you soon! 💰",
+      "payload": {
+        "mimeType": "multipart/alternative",
+        "headers": [
+          {
+            "name": "Cc",
+            "value": "odel.fhima@gmail.com"
+          }
+        ]
+      },
+      "sizeEstimate": 1166,
+      "historyId": "2135",
+      "internalDate": "1657794252000"
+    },
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+      "cache-control": "private",
+      "connection": "close",
+      "content-encoding": "gzip",
+      "content-type": "application/json; charset=UTF-8",
+      "date": "Wed, 20 Jul 2022 18:10:43 GMT",
+      "server": "ESF",
+      "transfer-encoding": "chunked",
+      "vary": "Origin, X-Origin, Referer",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "SAMEORIGIN",
+      "x-xss-protection": "0"
+    },
+    "status": 200,
+    "statusText": "OK",
+    "request": {
+      "responseURL": "https://gmail.googleapis.com/gmail/v1/users/me/messages/181fc3cce830b2e8?format=METADATA&metadataHeaders=Cc"
+    }
+  }
+]
