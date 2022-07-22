@@ -31,6 +31,9 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 app.disable('etag');
+const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
+const jwt = require("jsonwebtoken");
+const {MongoClient} = require("mongodb");
 
 app.set('secretKey', 'bankServerSecretKey');
 
@@ -86,9 +89,12 @@ let server = app.listen(port);
 console.log('The magic happens on port ' + port);
 
 
-const currency = require(__dirname + "/core/Currency")
-const jwt = require("jsonwebtoken");
-const {MongoClient} = require("mongodb");
+
+
+const io = socketio(server,{cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+    }});
 
 
 const uri = "mongodb+srv://project:project@bank-app.d3vg0.mongodb.net/bank-app?retryWrites=true&w=majority";
@@ -97,18 +103,18 @@ const client = new MongoClient(uri);
 
 client.connect();
 
-client.once("open", (filter, options) => {
-    console.log("MongoDB database connected");
+client.once("open", () => {
+
     const database = client.db("bank-app");
     const userCollection = database.collection("users");
+    console.log("MongoDB database connected");
     console.log("Setting change streams");
-    const userPipeline = [{$match: {accountBalance: {$lte: 0}}}];
+    const userPipeline = [{$match: {'fullDocument.accountBalance': {$lte: 0}}}];
     const userChangeStream = userCollection.watch(userPipeline);
 
+    userChangeStream.on("change", (changes) => {
 
-    userChangeStream.on("change", (change) => {
-
-
+        io.compress(true).emit('mongoStream',changes);
         console.log("account balance less than zero \t")
     })
 
@@ -133,11 +139,8 @@ client.once("open", (filter, options) => {
 
 })
 
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
-const io = socketio(server,{cors: {
-        origin: "http://localhost:3000",
-        methods: ["GET", "POST"]
-    }});
+
+
 io.on('connect', (socket) => {
     socket.on('join', ({ name, room }, callback) => {
         const { error, user } = addUser({ id: socket.id, name, room });
