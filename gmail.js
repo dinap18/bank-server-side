@@ -3,6 +3,8 @@ const MailComposer = require('nodemailer/lib/mail-composer');
 const credentials = require('./credentials.json');
 const tokens = require('./token.json');
 const _ = require('lodash');
+const user = require("./models/")("User");
+
 const getGmailService = () => {
     const {client_secret, client_id, redirect_uris} = credentials.installed;
     const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
@@ -47,15 +49,32 @@ const listMessages = async (req, res) => {
             format: "METADATA",
             metadataHeaders: "Cc",
         })))
-        const result =await Promise.all(_.map(messages,m =>
-              m["data"]["payload"]["headers"]
+        const result = await Promise.all(_.map(messages, async function (m) {
+                return {
+                    id: m.data.id,
+                    user: await user.findOne({email: m.data.payload.headers[0].value}),
+                    date: m.headers.date
+                }
+            }
         ))
-        console.log("here")
-        console.log(messages.length)
         res.json(result);
     } catch (error) {
         console.log(error)
         res.status(500).json({error: error});
     }
 }
-module.exports = {sendMail, listMessages};
+
+const deleteMessage = async (req, res) => {
+    try {
+
+        const gmail = getGmailService();
+        const messageId = req.params.id
+        const result = await gmail.users.messages.delete({userId: 'me', id: messageId})
+        res.status(200).json(`successfully deleted message ${messageId}`);
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error: error});
+    }
+}
+module.exports = {sendMail, listMessages, deleteMessage};

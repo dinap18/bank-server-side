@@ -15,9 +15,9 @@ module.exports = class LoanService {
 
     static async createLoan(data) {
         try {
-            const to = await UserService.getUserById(data.to);
+            const to = await UserService.getUserByUsername(data.to);
 
-            const from = await UserService.getUserById(data.from);
+            const from = await UserService.getUserByUsername(data.from);
 
             if (!to || !from || data.value < 0) {
                 throw new Error("invalid loan details");

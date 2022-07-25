@@ -31,6 +31,13 @@ module.exports = class User{
         } catch (error) {
             res.status(500).json({error: error})
         }
+    }static async apiGetUserByEmail(req, res,id){
+        try {
+            const user = await userService.getUserByEmail(id);
+            res.json(user);
+        } catch (error) {
+            res.status(500).json({error: error})
+        }
     }
 
     static async apiCreateUser(req, res, next){

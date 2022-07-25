@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const user = require("../models/")("User");
 const ObjectId = require('mongodb').ObjectId;
 const levCoinService = require('../services/LevCoinService')
-const {sendMail} = require( "../gmail");
+const {sendMail} = require("../gmail");
 
 module.exports = class UserService {
     static async getAllUsers() {
@@ -64,9 +64,24 @@ module.exports = class UserService {
         }
     }
 
+    static async getUsernameById(userId) {
+        try {
+            return await user.findById({_id: new ObjectId(userId)}, {'username': 1});
+
+        } catch (error) {
+            console.log(`User not found. ${error}`)
+        }
+    }
+
     static async getUserByUsername(userId) {
         try {
             return await user.findOne({username: userId});
+        } catch (error) {
+            console.log(`User not found. ${error}`)
+        }
+    }static async getUserByEmail(userId) {
+        try {
+            return await user.findOne({email: userId});
         } catch (error) {
             console.log(`User not found. ${error}`)
         }

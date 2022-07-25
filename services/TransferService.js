@@ -2,6 +2,7 @@ const Transfer = require("../models/")("Transfer");
 const {AuditLogBlockchain} = require("../services/AuditLogChainService")
 const UserService = require("../services/UserService")
 const Currency = require("../core/Currency")
+const _ = require("lodash");
 module.exports = class TransferService {
     static async getAllTransfers() {
         try {
@@ -15,9 +16,9 @@ module.exports = class TransferService {
     static async createTransfer(data) {
         try {
 
-            const to = await UserService.getUserById(data.to);
+            const to = await UserService.getUserByUsername(data.to);
 
-            const from = await UserService.getUserById(data.from);
+            const from = await UserService.getUserByUsername(data.from);
 
             if (!to || !from || data.value < 0) {
                 throw new Error("invalid transfer details");
@@ -39,7 +40,7 @@ module.exports = class TransferService {
             }
 
 
-            to.accountBalance += parseInt(to.accountBalance) + parseInt(data.value) -1 ;
+            to.accountBalance += parseInt(to.accountBalance) + parseInt(data.value) - 1;
             from.accountBalance = parseInt(from.accountBalance) - parseInt(data.value);
 
 
@@ -65,7 +66,7 @@ module.exports = class TransferService {
 
     static async getTransfersToById(transferId) {
         try {
-            return await Transfer.find({to: transferId});
+            return await Transfer.find({to: transferId})
 
         } catch (error) {
             console.log(`Transfer not found. ${error}`)
@@ -74,7 +75,7 @@ module.exports = class TransferService {
 
     static async getTransfersFromById(transferId) {
         try {
-            return await Transfer.find({from: transferId});
+            return await Transfer.find({from: transferId})
 
         } catch (error) {
             console.log(`Transfer not found. ${error}`)
