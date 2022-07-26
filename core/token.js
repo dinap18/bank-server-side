@@ -1,7 +1,7 @@
 const { google } = require('googleapis');
 const path = require('path');
 const fs = require('fs');
-const credentials = require('./credentials.json');
+const credentials = require('../credentials.json');
 
 // Replace with the code you received from Google
 const code = '4/1AdQt8qh6I44BIL-kwpFkDnJKUONrWwYHi_meIhTPp2N_l1p8YRy0i_TYHH0';

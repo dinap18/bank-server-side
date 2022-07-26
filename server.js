@@ -18,7 +18,7 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var LoanController =require('./controllers/LoanController')
+var LoanController = require('./controllers/LoanController')
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
@@ -31,7 +31,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 app.disable('etag');
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
+const {addUser, removeUser, getUser, getUsersInRoom} = require('./core/users');
 const jwt = require("jsonwebtoken");
 const {MongoClient} = require("mongodb");
 
@@ -89,12 +89,12 @@ let server = app.listen(port);
 console.log('The magic happens on port ' + port);
 
 
-
-
-const io = socketio(server,{cors: {
+const io = socketio(server, {
+    cors: {
         origin: "http://localhost:3000",
         methods: ["GET", "POST"]
-    }});
+    }
+});
 
 
 const uri = "mongodb+srv://project:project@bank-app.d3vg0.mongodb.net/bank-app?retryWrites=true&w=majority";
@@ -109,12 +109,20 @@ client.once("open", () => {
     const userCollection = database.collection("users");
     console.log("MongoDB database connected");
     console.log("Setting change streams");
-    const userPipeline = [{$match: {'fullDocument.accountBalance': {$lte: 0}}}];
-    const userChangeStream = userCollection.watch(userPipeline);
+    const userPipeline = [{
+        $match: {
+            $and: [
+                {"updateDescription.updatedFields.accountBalance": {$lte: 0}},
+                {operationType: "update"}]
+        }
+    }];
+
+    var options = {fullDocument: 'updateLookup'};
+    const userChangeStream = userCollection.watch(userPipeline,options);
 
     userChangeStream.on("change", (changes) => {
 
-        io.compress(true).emit('mongoStream',changes);
+        io.compress(true).emit('mongoStream', changes);
         console.log("account balance less than zero \t")
     })
 
@@ -124,14 +132,12 @@ client.once("open", () => {
         date: {$lte: new Date()},
         moneySent: false
     }).toArray(async function (err, docs) {
-        if (docs)
-        {
+        if (docs) {
             for (let i = 0; i < docs.length; i++) {
                 await LoanController.apiTransferCreatedLoan(docs[i])
             }
 
-        } else
-        {
+        } else {
             console.log("No loans need tp be transferred");
         }
     });
@@ -140,21 +146,23 @@ client.once("open", () => {
 })
 
 
-
 io.on('connect', (socket) => {
-    socket.on('join', ({ name, room }, callback) => {
-        const { error, user } = addUser({ id: socket.id, name, room });
+    socket.on('join', ({name, room}, callback) => {
+        const {error, user} = addUser({id: socket.id, name, room});
 
-        if(error) return callback(error);
+        if (error) return callback(error);
 
         socket.join(user.room);
 
-        socket.emit('message', { user: 'admin', text: `Welcome to Chain Bucks!`});
-        socket.emit('message', { user: 'admin', text: `We hope you are are enjoying our unique currency, LevCoin, and banking services`});
-        socket.emit('message', { user: 'admin', text: `We are happy to help with any issue that may arise`});
-        socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
+        socket.emit('message', {user: 'admin', text: `Welcome to Chain Bucks!`});
+        socket.emit('message', {
+            user: 'admin',
+            text: `We hope you are are enjoying our unique currency, LevCoin, and banking services`
+        });
+        socket.emit('message', {user: 'admin', text: `We are happy to help with any issue that may arise`});
+        socket.broadcast.to(user.room).emit('message', {user: 'admin', text: `${user.name} has joined!`});
 
-        io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+        io.to(user.room).emit('roomData', {room: user.room, users: getUsersInRoom(user.room)});
 
         callback();
     });
@@ -162,7 +170,7 @@ io.on('connect', (socket) => {
     socket.on('sendMessage', (message, callback) => {
         const user = getUser(socket.id);
 
-        io.to(user.room).emit('message', { user: user.name, text: message });
+        io.to(user.room).emit('message', {user: user.name, text: message});
 
         callback();
     });
@@ -170,9 +178,9 @@ io.on('connect', (socket) => {
     socket.on('disconnect', () => {
         const user = removeUser(socket.id);
 
-        if(user) {
-            io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
-            io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room)});
+        if (user) {
+            io.to(user.room).emit('message', {user: 'Admin', text: `${user.name} has left.`});
+            io.to(user.room).emit('roomData', {room: user.room, users: getUsersInRoom(user.room)});
         }
     })
 });

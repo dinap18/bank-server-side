@@ -2,14 +2,14 @@ const bcrypt = require("bcrypt");
 const user = require("../models/")("User");
 const ObjectId = require('mongodb').ObjectId;
 const levCoinService = require('../services/LevCoinService')
-const {sendMail} = require("../gmail");
+const {sendMail} = require("../core/gmail");
 
 module.exports = class UserService {
     static async getAllUsers() {
         try {
             return await user.find();
         } catch (error) {
-            console.log(`Could not fetch users ${error}`)
+            throw new Error(`Could not fetch users ${error}`)
         }
     }
 
@@ -25,13 +25,6 @@ module.exports = class UserService {
                     await levCoinService.createLevCoin(createdUser._id)
                 }
             }
-
-            const fileAttachments = [
-                {
-                    filename: 'websites.pdf',
-                    path: 'https://www.labnol.org/files/cool-websites.pdf',
-                },
-            ];
 
             const options = {
                 to: 'chainbucks11@gmail.com',
@@ -51,7 +44,7 @@ module.exports = class UserService {
 
             return createdUser
         } catch (error) {
-            console.log(error);
+            throw new Error(error);
         }
 
     }
@@ -69,7 +62,7 @@ module.exports = class UserService {
             return await user.findById({_id: new ObjectId(userId)}, {'username': 1});
 
         } catch (error) {
-            console.log(`User not found. ${error}`)
+            throw new Error(`User not found. ${error}`)
         }
     }
 
@@ -77,13 +70,13 @@ module.exports = class UserService {
         try {
             return await user.findOne({username: userId});
         } catch (error) {
-            console.log(`User not found. ${error}`)
+            throw new Error(`User not found. ${error}`)
         }
     }static async getUserByEmail(userId) {
         try {
             return await user.findOne({email: userId});
         } catch (error) {
-            console.log(`User not found. ${error}`)
+            throw new Error(`User not found. ${error}`)
         }
     }
 
@@ -94,7 +87,7 @@ module.exports = class UserService {
                 query, updatedUser
             );
         } catch (error) {
-            console.log(`Could not update User ${error}`);
+            throw new Error(`Could not update User ${error}`);
 
         }
     }
@@ -103,7 +96,7 @@ module.exports = class UserService {
         try {
             return await user.findOneAndDelete(userId);
         } catch (error) {
-            console.log(`Could not delete user ${error}`);
+            throw new Error(`Could not delete user ${error}`);
         }
 
     }

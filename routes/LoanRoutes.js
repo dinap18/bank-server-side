@@ -8,5 +8,6 @@ router.post("/", LoanCtrl.apiCreateLoan);
 router.get("/:id", LoanCtrl.apiGetLoanById);
 router.get("/to/:id", LoanCtrl.apiGetLoansToById);
 router.get("/from/:id", LoanCtrl.apiGetLoansFromById);
+router.put("/:id", LoanCtrl.apiPayBackLoan);
 
 module.exports =  router;

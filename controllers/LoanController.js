@@ -52,6 +52,15 @@ module.exports = class Loan{
             res.status(500).json({error: error});
         }
     }
+    static async apiPayBackLoan(req, res, next){
+        try {
+            let id = req.params.id || {};
+            const createdLoan =  await LoanService.payBackLoan(id,req.body);
+            res.json(createdLoan);
+        } catch (error) {
+            res.status(500).json({error: error});
+        }
+    }
 
 
 

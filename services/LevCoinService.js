@@ -8,7 +8,7 @@ module.exports = class LevCoinService {
         try {
             return await levCoin.find();
         } catch (error) {
-            console.log(`Could not fetch LevCoins ${error}`)
+            throw new Error(`Could not fetch LevCoins ${error}`)
         }
     }
 
@@ -61,7 +61,7 @@ module.exports = class LevCoinService {
 
             return await levCoin.create(data);
         } catch (error) {
-            console.log(error);
+            throw new Error(error);
         }
 
     }
@@ -84,7 +84,7 @@ module.exports = class LevCoinService {
             return sum
 
         } catch (error) {
-            console.log(`User not found. ${error}`)
+            throw new Error(`User not found. ${error}`)
         }
     }
 
@@ -94,7 +94,7 @@ module.exports = class LevCoinService {
             const query = {_id: new ObjectId(id)}
             return await levCoin.updateOne(query, updatedLevCoin);
         } catch (error) {
-            console.log(`Could not update LevCoin ${error}`);
+            throw new Error(`Could not update LevCoin ${error}`);
 
         }
     }
@@ -103,7 +103,7 @@ module.exports = class LevCoinService {
         try {
             return await levCoin.findOneAndDelete(levCoin);
         } catch (error) {
-            console.log(`Could not delete LevCoin ${error}`);
+            throw new Error(`Could not delete LevCoin ${error}`);
         }
 
     }

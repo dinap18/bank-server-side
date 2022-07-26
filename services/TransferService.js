@@ -9,7 +9,7 @@ module.exports = class TransferService {
             return await Transfer.find();
 
         } catch (error) {
-            console.log(`Could not fetch bank transfers ${error}`)
+            throw new Error(`Could not fetch bank transfers ${error}`)
         }
     }
 
@@ -23,6 +23,7 @@ module.exports = class TransferService {
             if (!to || !from || data.value < 0) {
                 throw new Error("invalid transfer details");
             }
+            let oldValue = data.value;
 
             if (to.accountCurrency !== from.accountCurrency) {
                 data.value = await Currency.convertCurrency(from.accountCurrency, to.accountCurrency, data.value)
@@ -40,7 +41,7 @@ module.exports = class TransferService {
             }
 
 
-            to.accountBalance += parseInt(to.accountBalance) + parseInt(data.value) - 1;
+            to.accountBalance += parseInt(to.accountBalance) + parseInt(oldValue);
             from.accountBalance = parseInt(from.accountBalance) - parseInt(data.value);
 
 
@@ -50,7 +51,7 @@ module.exports = class TransferService {
             return await Transfer.create(data);
 
         } catch (error) {
-            console.log(error);
+            throw new Error(error);
         }
 
     }
@@ -60,7 +61,7 @@ module.exports = class TransferService {
             return await Transfer.findById({_id: transferId});
 
         } catch (error) {
-            console.log(`Transfer not found. ${error}`)
+            throw new Error(`Transfer not found. ${error}`)
         }
     }
 
@@ -69,7 +70,7 @@ module.exports = class TransferService {
             return await Transfer.find({to: transferId})
 
         } catch (error) {
-            console.log(`Transfer not found. ${error}`)
+            throw new Error(`Transfer not found. ${error}`)
         }
     }
 
@@ -78,7 +79,7 @@ module.exports = class TransferService {
             return await Transfer.find({from: transferId})
 
         } catch (error) {
-            console.log(`Transfer not found. ${error}`)
+            throw new Error(`Transfer not found. ${error}`)
         }
     }
 }

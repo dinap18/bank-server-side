@@ -9,7 +9,7 @@ module.exports = class LoanService {
         try {
             return await Loan.find();
         } catch (error) {
-            console.log(`Could not fetch loans ${error}`)
+            throw new Error(`Could not fetch loans ${error}`)
         }
     }
 
@@ -25,7 +25,10 @@ module.exports = class LoanService {
 
             if (!(data.date && new Date(data.date) > new Date(Date.now()))) {
 
-                if (to.accountCurrency !== from.accountCurrency ) {
+                let oldValue = data.value;
+
+                if (to.accountCurrency !== from.accountCurrency) {
+
                     data.value = await Currency.convertCurrency(from.accountCurrency, to.accountCurrency, data.value)
                 }
 
@@ -47,7 +50,7 @@ module.exports = class LoanService {
                 if (!status) {
                     throw new Error("error validating loan");
                 }
-                to.accountBalance += parseInt(to.accountBalance) + parseInt(data.value) -1 ;
+                to.accountBalance += parseInt(to.accountBalance) + parseInt(oldValue);
                 from.accountBalance = parseInt(from.accountBalance) - parseInt(data.value);
 
                 data.moneySent = true;
@@ -58,19 +61,51 @@ module.exports = class LoanService {
             return await Loan.create(data);
 
         } catch (error) {
-            console.log(error);
+            throw new Error(error);
         }
 
     }
 
-    static async updateLoan(updatedLoan, id) {
+    static async payBackLoan(id, updatedLoan) {
         try {
             const query = {_id: new ObjectId(id)}
+
+            let to = await UserService.getUserByUsername(updatedLoan.to)
+            let from = await UserService.getUserByUsername(updatedLoan.from)
+
+            let oldLoan = await this.getLoanById(updatedLoan._id)
+            const amountToPay = parseInt(updatedLoan.payedBack) - parseInt(oldLoan.payedBack)
+
+            if (amountToPay < 0 || amountToPay > oldLoan.value)
+            {
+                console.log(amountToPay)
+                console.log(oldLoan.payedBack)
+                throw  new Error("cannot pay back loan")
+            }
+
+            let blockChain = new AuditLogBlockchain();
+            await blockChain.initialize();
+
+            await blockChain.createTransaction(updatedLoan);
+
+            let status = await blockChain.checkChainValidity();
+
+            if (!status) {
+                throw new Error("error validating loan");
+            }
+
+            to.accountBalance = to.accountBalance - amountToPay
+            from.accountBalance = from.accountBalance + amountToPay
+
+            await UserService.updateUser(to._id, to);
+            await UserService.updateUser(from._id, from);
+
+
             return await Loan.updateOne(
                 query, updatedLoan
             );
         } catch (error) {
-            console.log(`Could not update Loan ${error}`);
+            throw new Error(`Could not update Loan ${error}`);
 
         }
     }
@@ -103,7 +138,7 @@ module.exports = class LoanService {
 
 
         } catch (error) {
-            console.log(error);
+            throw new Error(error);
         }
 
     }
@@ -112,7 +147,7 @@ module.exports = class LoanService {
         try {
             return await Loan.findById({_id: loanId});
         } catch (error) {
-            console.log(`Loan not found. ${error}`)
+            throw new Error(`Loan not found. ${error}`)
         }
     }
 
@@ -120,7 +155,7 @@ module.exports = class LoanService {
         try {
             return await Loan.find({to: loanId});
         } catch (error) {
-            console.log(`Loan not found. ${error}`)
+            throw new Error(`Loan not found. ${error}`)
         }
     }
 
@@ -128,7 +163,7 @@ module.exports = class LoanService {
         try {
             return await Loan.find({from: loanId});
         } catch (error) {
-            console.log(`Loan not found. ${error}`)
+            throw new Error(`Loan not found. ${error}`)
         }
     }
 }

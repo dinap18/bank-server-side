@@ -3,7 +3,7 @@ const readline = require('readline');
 const {google} = require('googleapis');
 const  express =  require("express");
 const router = express.Router();
-const {listMessages, deleteMessage} = require ("../gmail");
+const {listMessages, deleteMessage} = require ("../core/gmail");
 
 
 
