@@ -1,5 +1,5 @@
 const { google } = require('googleapis');
-const credentials = require('../credentials.json');
+const credentials = require('./credentials.json');
 
 const { client_secret, client_id, redirect_uris } = credentials.installed;
 const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, "urn:ietf:wg:oauth:2.0:oob");

@@ -22,7 +22,10 @@ module.exports = class UserService {
 
             if (data.accountCurrency == "LEVCOIN") {
                 for (let i = 0; i < data.accountBalance; i++) {
-                    await levCoinService.createLevCoin(createdUser._id)
+                    let newData={};
+                    newData.value = data.accountBalance
+                    newData.user = data
+                    await levCoinService.createLevCoin(createdUser)
                 }
             }
 
@@ -72,7 +75,9 @@ module.exports = class UserService {
         } catch (error) {
             throw new Error(`User not found. ${error}`)
         }
-    }static async getUserByEmail(userId) {
+    }
+
+    static async getUserByEmail(userId) {
         try {
             return await user.findOne({email: userId});
         } catch (error) {

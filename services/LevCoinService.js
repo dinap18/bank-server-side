@@ -1,7 +1,7 @@
 const levCoin = require("../models/")("LevCoin");
 const ObjectId = require('mongodb').ObjectId;
 const {AuditLogBlockchain} = require("../services/AuditLogChainService");
-const Currency = require("../core/Currency");
+
 
 module.exports = class LevCoinService {
     static async getAllLevCoins() {

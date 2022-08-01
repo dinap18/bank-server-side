@@ -46,6 +46,7 @@ module.exports = class User{
             const createdUser =  await userService.createUser(req.body);
             res.json(createdUser);
         } catch (error) {
+            console.log(error)
             res.status(500).json({error: error});
         }
     }
