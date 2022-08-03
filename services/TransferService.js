@@ -45,8 +45,8 @@ module.exports = class TransferService {
             from.accountBalance = parseInt(from.accountBalance) - parseInt(data.value);
 
 
-            await UserService.updateUser(to, data.to);
-            await UserService.updateUser(from, data.from);
+            await UserService.updateUser(to._id, to);
+            await UserService.updateUser(from._id, from);
 
             return await Transfer.create(data);
 

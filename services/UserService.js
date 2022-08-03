@@ -25,7 +25,7 @@ module.exports = class UserService {
                     let newData={};
                     newData.value = data.accountBalance
                     newData.user = data
-                    await levCoinService.createLevCoin(createdUser)
+                    await levCoinService.createLevCoin(newData)
                 }
             }
 

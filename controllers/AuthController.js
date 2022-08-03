@@ -2,6 +2,7 @@ const authService = require("../services/AuthService");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 
+// fait le lien entre routes- url and service- parle avec mongoDb
 module.exports = class Auth {
 
     static async apiLogin(req, res, next) {

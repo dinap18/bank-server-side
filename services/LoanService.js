@@ -55,8 +55,8 @@ module.exports = class LoanService {
 
                 data.moneySent = true;
 
-                await UserService.updateUser(to, data.to);
-                await UserService.updateUser(from, data.from);
+                await UserService.updateUser(to._id, to);
+                await UserService.updateUser(from._id, from);
             }
             return await Loan.create(data);
 

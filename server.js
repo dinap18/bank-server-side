@@ -138,7 +138,7 @@ client.once("open", () => {
             }
 
         } else {
-            console.log("No loans need tp be transferred");
+            console.log("No loans need to be transferred");
         }
     });
 
